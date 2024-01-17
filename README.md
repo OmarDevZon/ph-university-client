@@ -43,6 +43,7 @@ export default router;
 
 changes main file
 main.tsx
+<br/>
 <React.StrictMode>
 
 ```bash
@@ -52,3 +53,11 @@ main.tsx
 </React.StrictMode>
 
 ---
+## How can setup a redux 
+1. crate a store
+2. connect a store in main file
+3. create a hook for type
+
+---
+
+

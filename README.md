@@ -53,11 +53,37 @@ main.tsx
 </React.StrictMode>
 
 ---
-## How can setup a redux 
+
+## How can setup a redux
+
 1. crate a store
+
+```bash
+import { configureStore } from "@reduxjs/toolkit";
+export const store = configureStore({
+reducer: {},
+});
+
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
+```
+
 2. connect a store in main file
+<React.StrictMode>
+```bash
+    <Provider store={store}>
+      <RouterProvider router={router} />
+    </Provider>
+```
+</React.StrictMode>
+
 3. create a hook for type
+```bash 
+import { useDispatch, useSelector } from 'react-redux'
+import type { TypedUseSelectorHook } from 'react-redux'
+import type { RootState, AppDispatch } from './store'
 
+export const useAppDispatch: () => AppDispatch = useDispatch
+export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
+```
 ---
-
-

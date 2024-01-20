@@ -4,7 +4,7 @@ import { ContactUs } from "../pages/contact";
 import { adminRouters } from "./admin.router";
 import { facultyRouters } from "./faculty.router";
 import { Login } from "../pages/authicatin/login";
-
+import { Protected } from "../components/protected";
 
 const router = createBrowserRouter([
   {
@@ -19,7 +19,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/admin",
-    element: <App />,
+    element: (
+      <Protected>
+        <App />
+      </Protected>
+    ),
     children: adminRouters,
   },
   {
@@ -28,9 +32,8 @@ const router = createBrowserRouter([
     children: facultyRouters,
   },
   {
-    
     path: "login",
-    element: <Login/>,
+    element: <Login />,
   },
 ]);
 

@@ -24,12 +24,13 @@ export const Login = () => {
     const result = await login(userInfo).unwrap();
     const token = result.data.accessToken;
     const user = verifyToken(token);
-    console.log(user);
     dispatch(setUser({ user, token: result.data.accessToken }));
   };
 
+  
   return (
     <section id="login-page">
+      
       <form onSubmit={handleSubmit(onSubmit)}>
         <div>
           <label htmlFor="id">Enter your id here</label>

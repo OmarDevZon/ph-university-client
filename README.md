@@ -196,12 +196,66 @@ baseUrl: "http://localhost:5000/api/v1",
 endpoints: () => ({}),
 });
 
-10 don't forget change server file 
-
+10 don't forget change server file
 
 app.use(cors({ origin: ['http://localhost:5173'],
+
 ```bash
- credentials: true 
+ credentials: true
 ```
- }));
+
+## }));
+
+### Redux Persist
+
+1.
+
+```bash
+npm i redux-persist
+```
+
+2.
+
+```bash
+import { persistStore, persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage"; // defaults to localStorage for web
+
+const persistConfig = { key: "auth", storage };
+
+const persistAuthReducer = persistReducer(persistConfig, authSlice);
+// enter this your store
+export const persister = persistStore(store);
+
+```
+
+3. don't forget change main file path
+
+```bash
+import { PersistGate } from "redux-persist/integration/react";
+
+```
+
+ <Provider store={store}>
+ ```bash 
+      <PersistGate loading={null} persistor={persister}>
+        <RouterProvider router={router} />
+      </PersistGate>
+ ``` 
+    </Provider>
+
+4. change store file
+
+middleware: (getDefaultMiddlewares) => {
+return getDefaultMiddlewares({
+
+```bash
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+```
+
+    }).concat(baseApi.middleware);
+
+},
+
 ---

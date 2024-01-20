@@ -3,6 +3,8 @@ import App from "../App";
 import { ContactUs } from "../pages/contact";
 import { adminRouters } from "./admin.router";
 import { facultyRouters } from "./faculty.router";
+import { Login } from "../pages/authicatin/login";
+
 
 const router = createBrowserRouter([
   {
@@ -24,6 +26,11 @@ const router = createBrowserRouter([
     path: "/faculty",
     element: <App />,
     children: facultyRouters,
+  },
+  {
+    
+    path: "login",
+    element: <Login/>,
   },
 ]);
 

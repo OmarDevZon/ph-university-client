@@ -204,7 +204,35 @@ app.use(cors({ origin: ['http://localhost:5173'],
  credentials: true
 ```
 
-## }));
+}));
+
+11. ### send a athuntication token
+    base query
+
+```bash
+ // sent a token
+  prepareHeaders: (headers, { getState }) => {
+    const token = (getState() as RootState).auth.token;
+
+    if (token) {
+      headers.set("Authorization", `${token}`);
+    }
+```
+
+12 . create a custom baseApi 
+
+```bash 
+
+
+export const baseQueryWithRefaceToken = async (args, api, extraOptions) => {
+  const result = await baseQuery(args, api, extraOptions);
+  console.log(result, "file name : base.api line number : +-19");
+};
+
+```
+  baseQuery: baseQuery, 
+ to 
+``` baseQuery: baseQueryWithRefaceToken,```
 
 ### Redux Persist
 
@@ -258,4 +286,4 @@ return getDefaultMiddlewares({
 
 },
 
----
+## 10

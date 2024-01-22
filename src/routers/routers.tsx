@@ -20,9 +20,7 @@ const router = createBrowserRouter([
   {
     path: "/admin",
     element: (
-      <Protected>
         <App />
-      </Protected>
     ),
     children: adminRouters,
   },

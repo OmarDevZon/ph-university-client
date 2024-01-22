@@ -1,3 +1,6 @@
+
+
+import { AcademicSemester } from "../pages/admin/academic.management/AcademicSemester";
 import { routGenerator, sidebarItemGenerator } from "./router.utils";
 
 export const adminPaths = [
@@ -11,7 +14,7 @@ export const adminPaths = [
     children: [
       {
         name: "Crate Admin",
-        path: "create-admin",
+        path: `/admin/create-admin`,
         element: "CreateAdmin",
       },
       {
@@ -26,6 +29,7 @@ export const adminPaths = [
       },
     ],
   },
+
   {
     name: "Course Management",
     children: [
@@ -33,6 +37,16 @@ export const adminPaths = [
         name: "Offered Course",
         path: "offered-course",
         element: "OfferedCourse",
+      },
+    ],
+  },
+  {
+    name: "Academic Management",
+    children: [
+      {
+        name: "Academic Semester",
+        path: "academic-semester",
+        element: <AcademicSemester/>,
       },
     ],
   },

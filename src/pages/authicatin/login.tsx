@@ -1,12 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button } from "antd";
-import { useForm } from "react-hook-form";
+import { FieldValues, useForm } from "react-hook-form";
 import { useLoginMutation } from "../../redux/feature/auth/auth.api";
 import { useAppDispatch } from "../../redux/feature/hooks";
-import { setUser } from "../../redux/feature/auth/auth.slice";
+import { TUser, setUser } from "../../redux/feature/auth/auth.slice";
 import { verifyToken } from "../../utils/verify.token";
+import { useNavigate } from "react-router-dom";
 
 export const Login = () => {
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const [login] = useLoginMutation();
   const { register, handleSubmit } = useForm({
@@ -15,7 +17,7 @@ export const Login = () => {
       password: "admin123",
     },
   });
-  const onSubmit = async (inputData: any) => {
+  const onSubmit = async (inputData: FieldValues) => {
     const userInfo = {
       id: inputData.id,
       password: inputData.password,
@@ -23,14 +25,13 @@ export const Login = () => {
 
     const result = await login(userInfo).unwrap();
     const token = result.data.accessToken;
-    const user = verifyToken(token);
+    const user = verifyToken(token) as TUser;
     dispatch(setUser({ user, token: result.data.accessToken }));
+    navigate(`/${user?.role}/`);
   };
 
-  
   return (
     <section id="login-page">
-      
       <form onSubmit={handleSubmit(onSubmit)}>
         <div>
           <label htmlFor="id">Enter your id here</label>

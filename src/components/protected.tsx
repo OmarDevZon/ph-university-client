@@ -10,6 +10,6 @@ export const Protected = ({ children }: { children: ReactNode }) => {
     return <Navigate to="/login" replace={true} />;
   }
 
-  console.log(token);
+  
   return children;
 };
